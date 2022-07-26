@@ -85,24 +85,19 @@ function paintCostcalculator(wallcount, wallSizeArr){
     let total = 0;
     for(let j= 0; j < wallcount; j++){ //iterates through the amount of walls
         let colour_Overall = 100 ; 
-        let colourAmount =  parseInt(prompt(`How many different colours would you like to use on wall number ${j} ? `));
+        let colourAmount =  parseInt(prompt(`How many different colours would you like to use on wall number ${j +1} ? `));
         let wallMeasure = wallSizeArr[j];
         for(let i = 0; i < colourAmount; i++ ){ //iterates over the number of colours selected by the user
             let colourPercentage = parseInt(prompt(`what percantge of the wall number ${j + 1} would you like to paint the colour with? `));
             if(colourPercentage > colour_Overall){
                 console.log('percentage too high!');
+                i = i - 1; 
             }
             else{ 
                 colour_Overall -= colourPercentage;
                 let paintCost = parseInt(prompt('How much does this paint cost per liter? '));
                 let amountCovered = wallMeasure*(colourPercentage/100); // calculate how much of the wall this colour will cover
-                let tempTotalLiter = amountCovered/10; //work out how much paint is needed to cover this area
-                if(tempTotalLiter < 1){  //1 liter is the minimum amount of paint you can purchase
-                    tempTotalLiter = 1;
-                }
-                else{
-                    tempTotalLiter = tempTotalLiter
-                }
+                let tempTotalLiter = Math.ceil(amountCovered/10); //work out how much paint is needed to cover this area and rounds up as you cannot buy half tins of paint
                 let tempCost = paintCost * tempTotalLiter;
                 total += tempCost;
                 console.log(total)

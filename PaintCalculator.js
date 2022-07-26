@@ -1,11 +1,11 @@
 const prompt = require('prompt-sync')();
-PaintCalculator();
+PaintCalculator(); // calling paint calculator function 
 function PaintCalculator(){
     let wallSizeArr = [];
     let PaintOverall;
 
     const wallcount = parseInt(prompt('how many walls do you need to paint? '));
-    for(let i = 0; i < wallcount; i++){
+    for(let i = 0; i < wallcount; i++){ //for loop to iterate over the wall amounts
         let wallSize = parseInt(prompt('How big is your wall in meter sqrd?' ));
         let coatNo = parseInt(prompt('How many coats of paint do you want to apply? '));
         let Window = prompt('does the wall have windows Y/N? ');
@@ -40,7 +40,7 @@ function PaintCalculator(){
              console.log('ok no door');
         
         }
-        let obstructions = socket_size + window_size;
+        let obstructions = socket_size + window_size;  //calculating the deductions from the wall size
         wallSize = wallSize - obstructions;
         if(wallSize < 0){
             console.log(`Your wallsize is apparently: ${wallSize} m sqrd, this is obviously incorrect start over!`);
@@ -48,7 +48,7 @@ function PaintCalculator(){
         }
         else{
             if(obstructions > 0){
-                PaintTotal = (wallSize * coatNo)/10;
+                PaintTotal = (wallSize * coatNo)/10; //a liter covers 10 sqr meters of wall
             }
             else{
                 PaintTotal = (wallSize * coatNo)/10;
@@ -62,13 +62,13 @@ function PaintCalculator(){
     let complete = prompt('Do you still need the paint calculator Y/N ? ');
     complete = complete.toUpperCase();
     if(complete == 'Y'){
-        PaintCalculator();
+        PaintCalculator(); // recursive call to the start of the PaintCalculator function 
     }
     else if(complete == 'N'){
         let paintCost = prompt('Would you like to find out how much this would cost Y/N? ');
         paintCost = paintCost.toUpperCase();
         if(paintCost == 'Y'){
-            paintCostcalculator(wallcount, wallSizeArr);
+            paintCostcalculator(wallcount, wallSizeArr); //calls paint cost function
         }
         else{ 
             console.log('Ok see you next time');
@@ -83,11 +83,11 @@ function PaintCalculator(){
 }
 function paintCostcalculator(wallcount, wallSizeArr){
     let total = 0;
-    for(let j= 0; j < wallcount; j++){
-        let colour_Overall = 100 ;
+    for(let j= 0; j < wallcount; j++){ //iterates through the amount of walls
+        let colour_Overall = 100 ; 
         let colourAmount =  parseInt(prompt(`How many different colours would you like to use on wall number ${j} ? `));
         let wallMeasure = wallSizeArr[j];
-        for(let i = 0; i < colourAmount; i++ ){
+        for(let i = 0; i < colourAmount; i++ ){ //iterates over the number of colours selected by the user
             let colourPercentage = parseInt(prompt(`what percantge of the wall number ${j + 1} would you like to paint the colour with? `));
             if(colourPercentage > colour_Overall){
                 console.log('percentage too high!');
@@ -95,9 +95,9 @@ function paintCostcalculator(wallcount, wallSizeArr){
             else{ 
                 colour_Overall -= colourPercentage;
                 let paintCost = parseInt(prompt('How much does this paint cost per liter? '));
-                let amountCovered = wallMeasure*(colourPercentage/100);
-                let tempTotalLiter = amountCovered/10;
-                if(tempTotalLiter < 1){
+                let amountCovered = wallMeasure*(colourPercentage/100); // calculate how much of the wall this colour will cover
+                let tempTotalLiter = amountCovered/10; //work out how much paint is needed to cover this area
+                if(tempTotalLiter < 1){  //1 liter is the minimum amount of paint you can purchase
                     tempTotalLiter = 1;
                 }
                 else{
@@ -117,13 +117,13 @@ function paintCostcalculator(wallcount, wallSizeArr){
     let complete = prompt('Do you want to return back to the paint calculator? ');
     complete = complete.toUpperCase();
     if(complete == 'Y'){
-        PaintCalculator();
+        PaintCalculator(); 
     }
     else if(complete == 'N'){
         let paintCost = prompt('Would you like to calculate the price with some different paints? ');
         paintCost = paintCost.toUpperCase();
         if(paintCost == 'Y'){
-            paintCostcalculator(wallcount, wallSizeArr);
+            paintCostcalculator(wallcount, wallSizeArr); // recursive call to the start of the paint costing function
         }
         else{ 
             console.log('Ok see you next time');

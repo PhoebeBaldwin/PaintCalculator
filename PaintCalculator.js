@@ -21,15 +21,15 @@ function PaintCalculator(){
             Window = Window.toUpperCase();
             // conditional statements to check for doors, windows and plug sockets
             if(Window == 'Y'){ 
-                let doorComplete = false;
-                while(doorComplete == false){
-                let doorNumber = parseInt(prompt('How many windows do you have? '))
-                    if(isNaN(doorNumber)== false){
+                let windowComplete = false;
+                while(windowComplete == false){  //loops round until user enters a number
+                let windowNumber = parseInt(prompt('How many windows do you have? '))
+                    if(isNaN(windowNumber)== false){   //checks if user input is a number 
                         for(let x = 0; x < doorNumber; x++){
                             let window_Height = parseInt(prompt('How tall is your window in meters? ')) ; 
                             let window_Width =  parseInt(prompt('How wide is your window in meters? ')) ; 
                             window_size = sqrMeter(window_Width, window_Height);
-                            doorComplete = true;
+                            windowComplete = true;
                         }
                     }
                     else{
@@ -47,9 +47,9 @@ function PaintCalculator(){
             socket= socket.toUpperCase()
             if(socket == 'Y'){
                 let socketComplete = false;
-                while(socketComplete == false){
+                while(socketComplete == false){   //loops round until user enters a number
                     let socketNumber = parseInt(prompt('How many plugs do you have? '));
-                    if(isNan(socketNumber) == false){
+                    if(isNaN(socketNumber) == false){   //checks if user input is a number 
                         for(let i = 0; i< socketNumber; i++){
                             let socket_Height = parseInt(prompt(`How tall is plug No.${i + 1}? `)) ; //array position starts at 0 so 1 is added on to the output display 
                             let socket_Width =  parseInt(prompt(`How wide is  plug No.${i + 1}? `)) ; 
@@ -71,9 +71,19 @@ function PaintCalculator(){
             let door = prompt('does the wall have a door Y/N? ')
             door = door.toUpperCase();
             if(door == 'Y'){
-                let door_Height = parseInt(prompt('How tall is your door in meters? ')) ; 
-                let door_Width =  parseInt(prompt('How wide is your door in meters? ')) ; 
-                door_size = sqrMeter(door_Width, door_Height);
+                let doorComplete = false;
+                while(doorComplete == false){
+                    let doorNumber = parseInt(prompt('How many doors? '));
+                    if(isNan(doorNumber) == false){
+                        let door_Height = parseInt(prompt('How tall is your door in meters? ')) ; 
+                        let door_Width =  parseInt(prompt('How wide is your door in meters? ')) ; 
+                        door_size = sqrMeter(door_Width, door_Height);
+                        doorComplete = true;
+                    }
+                    else{
+                        console.log('Please enter in a number!')
+                    }
+                }
             }
             else{
                 console.log('ok no door');
